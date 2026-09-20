@@ -4,141 +4,102 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bureau du DG Nasri</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
   <header>
-  <h1>Bureau du DG Nasri</h1>
-  <p>PDG : Amadou DEME</p>
-</header>
+    <h1>Bureau du DG Nasri</h1>
+    <p>PDG : Amadou DEME</p>
+  </header>
+
+  <p>Bienvenue dans votre espace de direction.</p>
+
+  <section class="stats">
+    <div>
+      <strong id="missions">0</strong>
+      <span>Missions</span>
+    </div>
+
+    <div>
+      <strong id="candidatures">0</strong>
+      <span>Candidatures</span>
+    </div>
+
+    <div>
+      <strong id="alertes">0</strong>
+      <span>Alertes</span>
+    </div>
+
+    <div>
+      <strong id="decisions">0</strong>
+      <span>Décisions</span>
+    </div>
+  </section>
+
+  <section id="missions-section">
+    <h2>Missions</h2>
+
+    <button id="new-mission">
+      + Nouvelle mission
+    </button>
+
+    <form id="mission-form" hidden>
+      <input
+        type="text"
+        id="mission-title"
+        placeholder="Titre de la mission"
+        required
+      >
+
+      <select id="mission-status">
+        <option value="NOUVELLE">NOUVELLE</option>
+        <option value="EN ANALYSE">EN ANALYSE</option>
+        <option value="EN COURS">EN COURS</option>
+        <option value="TERMINÉE">TERMINÉE</option>
+        <option value="BLOQUÉE">BLOQUÉE</option>
+        <option value="ARCHIVÉE">ARCHIVÉE</option>
+      </select>
+
+      <button type="submit">
+        Enregistrer la mission
+      </button>
+    </form>
+
+    <div id="missions-list">
+      <div class="mission">
+        <strong>Aucune mission pour le moment</strong>
+        <span>État : EN ATTENTE</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="nasri-chat">
+    <h2>💬 Bureau de Nasri</h2>
+
+    <div id="chat-messages">
+      <div class="message nasri">
+        <strong>Nasri — DG</strong>
+        <p>Bonjour PDG Amadou DEME. Je suis à votre écoute.</p>
+      </div>
+    </div>
+
+    <form id="chat-form">
+      <input
+        type="text"
+        id="chat-input"
+        placeholder="Écrivez votre message à Nasri..."
+        required
+      >
+
+      <button type="submit">
+        Envoyer
+      </button>
+    </form>
+  </section>
+
+  <script src="app.js"></script>
 
 </body>
 </html>
-<section id="nasri-chat">
-  <h2>💬 Bureau de Nasri</h2>
-
-  <div id="chat-messages">
-    <div class="message nasri">
-      <strong>Nasri — DG</strong>
-      <p>Bonjour PDG Amadou DEME. Je suis à votre écoute.</p>
-    </div>
-  </div>
-
-  <form id="chat-form">
-    <input
-      type="text"
-      id="chat-input"
-      placeholder="Écrivez votre message à Nasri..."
-      required
-    >
-
-    <button type="submit">
-      Envoyer
-    </button>
-  </form>
-</section>
-<section id="nasri-chat">
-  <h2>💬 Bureau de Nasri</h2>
-
-  <div id="chat-messages">
-    <div class="message nasri">
-      <strong>Nasri — DG</strong>
-      <p>Bonjour PDG Amadou DEME. Je suis à votre écoute.</p>
-    </div>
-  </div>
-
-  <form id="chat-form">
-    <input
-      type="text"
-      id="chat-input"
-      placeholder="Écrivez votre message à Nasri..."
-      required
-    >
-
-    <button type="submit">
-      Envoyer
-    </button>
-  </form>
-</section>
-<script src="app.js"></script>
-<p>Bienvenue dans votre espace de direction.</p>
-<section class="stats">
-  <div id="missions-list">
-  <div class="mission">
-    <strong>Aucune mission pour le moment</strong>
-    <span>État : EN ATTENTE</span>
-  </div>
-</div>
-
-  <div>
-    <strong id="candidatures">0</strong>
-    <span>Candidatures</span>
-  </div>
-
-  <div>
-    <strong id="alertes">0</strong>
-    <span>Alertes</span>
-  </div>
-
-  <div>
-    <strong id="decisions">0</strong>
-    <span>Décisions</span>
-  </div>
-<section id="missions-section">
-  <h2>Missions</h2>
-
-  <button id="new-mission">
-    + Nouvelle mission
-  </button>
-<form id="mission-form" hidden>
-
-  <input
-    type="text"
-    id="mission-title"
-    placeholder="Titre de la mission"
-    required
-  >
-
-  <select id="mission-status">
-    <option value="NOUVELLE">NOUVELLE</option>
-    <option value="EN ANALYSE">EN ANALYSE</option>
-    <option value="EN COURS">EN COURS</option>
-    <option value="TERMINÉE">TERMINÉE</option>
-    <option value="BLOQUÉE">BLOQUÉE</option>
-    <option value="ARCHIVÉE">ARCHIVÉE</option>
-  </select>
-
-  <button type="submit">
-    Enregistrer la mission
-  </button>
-
-</form>
-  <div class="mission">
-    <strong>Aucune mission pour le moment</strong>
-    <span>État : EN ATTENTE</span>
-  </div>
-</section>
-<section id="nasri-chat">
-  <h2>💬 Bureau de Nasri</h2>
-
-  <div id="chat-messages">
-    <div class="message nasri">
-      <strong>Nasri — DG</strong>
-      <p>Bonjour PDG Amadou DEME. Je suis à votre écoute.</p>
-    </div>
-  </div>
-
-  <form id="chat-form">
-    <input
-      type="text"
-      id="chat-input"
-      placeholder="Écrivez votre message à Nasri..."
-      required
-    >
-
-    <button type="submit">
-      Envoyer
-    </button>
-  </form>
-</section>
