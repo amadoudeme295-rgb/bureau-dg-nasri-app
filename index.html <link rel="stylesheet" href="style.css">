@@ -38,3 +38,11 @@
     <span>Décisions</span>
   </div>
 </section>
+<section id="missions-section">
+  <h2>Missions</h2>
+
+  <div class="mission">
+    <strong>Aucune mission pour le moment</strong>
+    <span>État : EN ATTENTE</span>
+  </div>
+</section>
