@@ -73,3 +73,26 @@
     <span>État : EN ATTENTE</span>
   </div>
 </section>
+<section id="nasri-chat">
+  <h2>💬 Bureau de Nasri</h2>
+
+  <div id="chat-messages">
+    <div class="message nasri">
+      <strong>Nasri — DG</strong>
+      <p>Bonjour PDG Amadou DEME. Je suis à votre écoute.</p>
+    </div>
+  </div>
+
+  <form id="chat-form">
+    <input
+      type="text"
+      id="chat-input"
+      placeholder="Écrivez votre message à Nasri..."
+      required
+    >
+
+    <button type="submit">
+      Envoyer
+    </button>
+  </form>
+</section>
