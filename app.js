@@ -1,86 +1,85 @@
 const bureau = {
-  nom: "Bureau du DG Nasri",
-  pdg: "Amadou DEME",
-  missions: []
+    nom: "Bureau du DG Nasri",
+    pdg: "Amadou DEME",
+    missions: []
 };
 
+// --- GESTION DES MISSIONS ---
 const boutonMission = document.getElementById("new-mission");
 const formulaireMission = document.getElementById("mission-form");
 const listeMissions = document.getElementById("missions-list");
 
-boutonMission.addEventListener("click", function () {
-  formulaireMission.hidden = !formulaireMission.hidden;
-});
+if (boutonMission && formulaireMission) {
+    boutonMission.addEventListener("click", function () {
+        formulaireMission.hidden = !formulaireMission.hidden;
+    });
+}
 
-formulaireMission.addEventListener("submit", function (event) {
-  event.preventDefault();
+if (formulaireMission) {
+    formulaireMission.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-  const titre = document.getElementById("mission-title").value;
-  const statut = document.getElementById("mission-status").value;
+        const titre = document.getElementById("mission-title").value;
+        const statut = document.getElementById("mission-status").value;
 
-  bureau.missions.push({
-    titre: titre,
-    statut: statut
-  });
+        bureau.missions.push({
+            titre: titre,
+            statut: statut
+        });
 
-  afficherMissions();
+        afficherMissions();
 
-  formulaireMission.reset();
-  formulaireMission.hidden = true;
-});
+        formulaireMission.reset();
+        formulaireMission.hidden = true;
+    });
+}
 
 function afficherMissions() {
-  listeMissions.innerHTML = "";
+    if (!listeMissions) return;
+    listeMissions.innerHTML = "";
 
-  bureau.missions.forEach(function (mission) {
-    const element = document.createElement("div");
-
-    element.className = "mission";
-
-    element.innerHTML = `
-      <strong>${mission.titre}</strong>
-      <span>État : ${mission.statut}</span>
-    `;
-
-    listeMissions.appendChild(element);
-  });
+    bureau.missions.forEach(function (mission) {
+        const element = document.createElement("div");
+        element.className = "mission";
+        element.innerHTML = `
+            <strong>${mission.titre}</strong>
+            <span>État : ${mission.statut}</span>
+        `;
+        listeMissions.appendChild(element);
+    });
 }
+
+// --- GESTION DU CHAT (PDG -> NASRI) ---
 const chatForm = document.getElementById("chat-form");
 const chatInput = document.getElementById("chat-input");
 const chatMessages = document.getElementById("chat-messages");
 
-chatForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+if (chatForm) {
+    chatForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // Empêche la page de se recharger
 
-  const message = chatInput.value.trim();
+        const message = chatInput.value.trim();
 
-  if (message === "") {
-    return;
-  }
+        if (message === "") {
+            return;
+        }
 
-  const messageElement = document.createElement("div");
-  messageElement.className = "message pdg";
+        // 1. Affichage du message du PDG
+        const messageElement = document.createElement("div");
+        messageElement.className = "message pdg";
+        messageElement.textContent = `PDG: ${message}`;
+        chatMessages.appendChild(messageElement);
 
-  messageElement.innerHTML = `
-    <strong>PDG — Amadou DEME</strong>
-    <p>${message}</p>
-  `;
-
-  chatMessages.appendChild(messageElement);
-
-  chatInput.value = "";
-});
-    messageElement.textContent = `PDG: ${message}`;
-    chatMessages.appendChild(messageElement);
-
-    chatInput.value = "";
-
-    // --- REPONSE DE NASRI ---
-    setTimeout(function() {
-        const nasriElement = document.createElement("div");
-        nasriElement.className = "message nasri";
-        nasriElement.textContent = `Nasri: Bien reçu PDG. Je traite votre demande: "${message}"`;
-        chatMessages.appendChild(nasriElement);
+        chatInput.value = "";
         chatMessages.scrollTop = chatMessages.scrollHeight;
-    }, 1000);
-});
+
+        // 2. Réponse automatique de Nasri après 1 seconde
+        setTimeout(function () {
+            const nasriElement = document.createElement("div");
+            nasriElement.className = "message nasri";
+            nasriElement.textContent = `Nasri: Bien reçu PDG. Je traite votre demande: "${message}"`;
+            chatMessages.appendChild(nasriElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }, 1000);
+    });
+}
