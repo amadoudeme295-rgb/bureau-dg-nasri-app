@@ -37,9 +37,12 @@
     <strong id="decisions">0</strong>
     <span>Décisions</span>
   </div>
-</section>
 <section id="missions-section">
   <h2>Missions</h2>
+
+  <button id="new-mission">
+    + Nouvelle mission
+  </button>
 
   <div class="mission">
     <strong>Aucune mission pour le moment</strong>
