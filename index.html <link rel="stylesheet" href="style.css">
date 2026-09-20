@@ -16,3 +16,25 @@
 </body>
 </html>
 <script src="app.js"></script>
+<p>Bienvenue dans votre espace de direction.</p>
+<section class="stats">
+  <div>
+    <strong id="missions">0</strong>
+    <span>Missions</span>
+  </div>
+
+  <div>
+    <strong id="candidatures">0</strong>
+    <span>Candidatures</span>
+  </div>
+
+  <div>
+    <strong id="alertes">0</strong>
+    <span>Alertes</span>
+  </div>
+
+  <div>
+    <strong id="decisions">0</strong>
+    <span>Décisions</span>
+  </div>
+</section>
