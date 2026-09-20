@@ -7,4 +7,7 @@ const bureau = {
   decisions: 0
 };
 
-console.log(bureau);
+document.getElementById("missions").textContent = bureau.missions;
+document.getElementById("candidatures").textContent = bureau.candidatures;
+document.getElementById("alertes").textContent = bureau.alertes;
+document.getElementById("decisions").textContent = bureau.decisions;
