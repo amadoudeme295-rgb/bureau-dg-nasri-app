@@ -43,7 +43,29 @@
   <button id="new-mission">
     + Nouvelle mission
   </button>
+<form id="mission-form" hidden>
 
+  <input
+    type="text"
+    id="mission-title"
+    placeholder="Titre de la mission"
+    required
+  >
+
+  <select id="mission-status">
+    <option value="NOUVELLE">NOUVELLE</option>
+    <option value="EN ANALYSE">EN ANALYSE</option>
+    <option value="EN COURS">EN COURS</option>
+    <option value="TERMINÉE">TERMINÉE</option>
+    <option value="BLOQUÉE">BLOQUÉE</option>
+    <option value="ARCHIVÉE">ARCHIVÉE</option>
+  </select>
+
+  <button type="submit">
+    Enregistrer la mission
+  </button>
+
+</form>
   <div class="mission">
     <strong>Aucune mission pour le moment</strong>
     <span>État : EN ATTENTE</span>
