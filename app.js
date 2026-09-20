@@ -70,3 +70,17 @@ chatForm.addEventListener("submit", function (event) {
 
   chatInput.value = "";
 });
+    messageElement.textContent = `PDG: ${message}`;
+    chatMessages.appendChild(messageElement);
+
+    chatInput.value = "";
+
+    // --- REPONSE DE NASRI ---
+    setTimeout(function() {
+        const nasriElement = document.createElement("div");
+        nasriElement.className = "message nasri";
+        nasriElement.textContent = `Nasri: Bien reçu PDG. Je traite votre demande: "${message}"`;
+        chatMessages.appendChild(nasriElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 1000);
+});
