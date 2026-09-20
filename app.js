@@ -1,68 +1,11 @@
-const bureau = {
-    nom: "Bureau du DG Nasri",
-    pdg: "Amadou DEME",
-    missions: []
-};
-
-// --- GESTION DES MISSIONS ---
-const boutonMission = document.getElementById("new-mission");
-const formulaireMission = document.getElementById("mission-form");
-const listeMissions = document.getElementById("missions-list");
-
-if (boutonMission && formulaireMission) {
-    boutonMission.addEventListener("click", function () {
-        formulaireMission.hidden = !formulaireMission.hidden;
-    });
-}
-
-if (formulaireMission) {
-    formulaireMission.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const titre = document.getElementById("mission-title").value;
-        const statut = document.getElementById("mission-status").value;
-
-        bureau.missions.push({
-            titre: titre,
-            statut: statut
-        });
-
-        afficherMissions();
-
-        formulaireMission.reset();
-        formulaireMission.hidden = true;
-    });
-}
-
-function afficherMissions() {
-    if (!listeMissions) return;
-    listeMissions.innerHTML = "";
-
-    bureau.missions.forEach(function (mission) {
-        const element = document.createElement("div");
-        element.className = "mission";
-        element.innerHTML = `
-            <strong>${mission.titre}</strong>
-            <span>État : ${mission.statut}</span>
-        `;
-        listeMissions.appendChild(element);
-    });
-}
-
-// --- GESTION DU CHAT (PDG -> NASRI) ---
-const chatForm = document.getElementById("chat-form");
-const chatInput = document.getElementById("chat-input");
-const chatMessages = document.getElementById("chat-messages");
+// Remplacez la partie écouteur du formulaire de chat dans app.js par ceci :
 
 if (chatForm) {
-    chatForm.addEventListener("submit", function (event) {
-        event.preventDefault(); // Empêche la page de se recharger
+    chatForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
 
         const message = chatInput.value.trim();
-
-        if (message === "") {
-            return;
-        }
+        if (message === "") return;
 
         // 1. Affichage du message du PDG
         const messageElement = document.createElement("div");
@@ -73,13 +16,47 @@ if (chatForm) {
         chatInput.value = "";
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        // 2. Réponse automatique de Nasri après 1 seconde
-        setTimeout(function () {
-            const nasriElement = document.createElement("div");
-            nasriElement.className = "message nasri";
-            nasriElement.textContent = `Nasri: Bien reçu PDG. Je traite votre demande: "${message}"`;
-            chatMessages.appendChild(nasriElement);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }, 1000);
+        // 2. Indicateur de réflexion de Nasri
+        const loadingElement = document.createElement("div");
+        loadingElement.className = "message nasri";
+        loadingElement.textContent = "Nasri réfléchi...";
+        chatMessages.appendChild(loadingElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        try {
+            // Appel à l'API OpenAI (ou modèle équivalent)
+            const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer VOTRE_CLE_API_ICI"
+                },
+                body: JSON.stringify({
+                    model: "gpt-4o-mini",
+                    messages: [
+                        {
+                            role: "system",
+                            content: "Tu es Nasri, le Directeur Général virtuel de l'agence IA. Tu t'adresses à votre PDG Amadou DEME. Tu es professionnel, structuré et proactif."
+                        },
+                        {
+                            role: "user",
+                            content: message
+                        }
+                    ]
+                })
+            });
+
+            const data = await response.json();
+            const reponseIA = data.choices[0].message.content;
+
+            // Remplacer l'indicateur par la réponse réelle
+            loadingElement.textContent = `Nasri: ${reponseIA}`;
+
+        } catch (error) {
+            loadingElement.textContent = "Nasri: Désolé PDG, une erreur est survenue lors de la connexion à mon cerveau IA.";
+            console.error("Erreur API:", error);
+        }
+
+        chatMessages.scrollTop = chatMessages.scrollHeight;
     });
 }
