@@ -6,6 +6,7 @@ const bureau = {
 
 const boutonMission = document.getElementById("new-mission");
 const formulaireMission = document.getElementById("mission-form");
+const listeMissions = document.getElementById("missions-list");
 
 boutonMission.addEventListener("click", function () {
   formulaireMission.hidden = !formulaireMission.hidden;
@@ -17,17 +18,30 @@ formulaireMission.addEventListener("submit", function (event) {
   const titre = document.getElementById("mission-title").value;
   const statut = document.getElementById("mission-status").value;
 
-  const mission = {
+  bureau.missions.push({
     titre: titre,
     statut: statut
-  };
+  });
 
-  bureau.missions.push(mission);
-
-  alert("Mission enregistrée : " + titre);
+  afficherMissions();
 
   formulaireMission.reset();
   formulaireMission.hidden = true;
-
-  console.log(bureau.missions);
 });
+
+function afficherMissions() {
+  listeMissions.innerHTML = "";
+
+  bureau.missions.forEach(function (mission) {
+    const element = document.createElement("div");
+
+    element.className = "mission";
+
+    element.innerHTML = `
+      <strong>${mission.titre}</strong>
+      <span>État : ${mission.statut}</span>
+    `;
+
+    listeMissions.appendChild(element);
+  });
+}
