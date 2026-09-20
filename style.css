@@ -30,3 +30,34 @@ header p {
   margin: 0;
   color: #cbd5e1;
 }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.stats div {
+  background: white;
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.stats strong {
+  display: block;
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.stats span {
+  color: #64748b;
+  font-size: 14px;
+}
+
+@media (max-width: 700px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
