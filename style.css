@@ -61,3 +61,29 @@ header p {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+#missions-section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+#missions-section h2 {
+  margin-top: 0;
+}
+
+.mission {
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.mission strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.mission span {
+  color: #64748b;
+  font-size: 14px;
+}
