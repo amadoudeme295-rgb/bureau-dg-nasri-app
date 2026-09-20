@@ -60,3 +60,6 @@ if (chatForm) {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     });
 }
+const SUPABASE_URL = "https://bhkmjzutiifhssmbbrul.supabase.co"; // Récupéré de votre capture précédente
+const SUPABASE_KEY = "VOTRE_CLE_PUBLISHABLE_ICI"; // Collez la clé copiée à l'Étape 1
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
