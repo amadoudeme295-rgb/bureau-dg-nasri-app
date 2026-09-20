@@ -18,10 +18,12 @@
 <script src="app.js"></script>
 <p>Bienvenue dans votre espace de direction.</p>
 <section class="stats">
-  <div>
-    <strong id="missions">0</strong>
-    <span>Missions</span>
+  <div id="missions-list">
+  <div class="mission">
+    <strong>Aucune mission pour le moment</strong>
+    <span>État : EN ATTENTE</span>
   </div>
+</div>
 
   <div>
     <strong id="candidatures">0</strong>
