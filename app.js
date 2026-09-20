@@ -11,3 +11,8 @@ document.getElementById("missions").textContent = bureau.missions;
 document.getElementById("candidatures").textContent = bureau.candidatures;
 document.getElementById("alertes").textContent = bureau.alertes;
 document.getElementById("decisions").textContent = bureau.decisions;
+const boutonMission = document.getElementById("new-mission");
+
+boutonMission.addEventListener("click", function () {
+  alert("Création d'une nouvelle mission — fonctionnalité en préparation.");
+});
