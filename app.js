@@ -1,65 +1,61 @@
-// Remplacez la partie écouteur du formulaire de chat dans app.js par ceci :
+const NASRI_URL =
+  "https://bhkmjzutiifhssmbbrul.supabase.co/functions/v1/nasri";
 
-if (chatForm) {
-    chatForm.addEventListener("submit", async function (event) {
-        event.preventDefault();
+const chatForm = document.getElementById("chatForm");
+const chatInput = document.getElementById("chatInput");
+const chatMessages = document.getElementById("chatMessages");
 
-        const message = chatInput.value.trim();
-        if (message === "") return;
+if (chatForm && chatInput && chatMessages) {
+  chatForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-        // 1. Affichage du message du PDG
-        const messageElement = document.createElement("div");
-        messageElement.className = "message pdg";
-        messageElement.textContent = `PDG: ${message}`;
-        chatMessages.appendChild(messageElement);
+    const message = chatInput.value.trim();
 
-        chatInput.value = "";
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+    if (!message) return;
 
-        // 2. Indicateur de réflexion de Nasri
-        const loadingElement = document.createElement("div");
-        loadingElement.className = "message nasri";
-        loadingElement.textContent = "Nasri réfléchi...";
-        chatMessages.appendChild(loadingElement);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+    // Afficher le message du PDG
+    const userMessage = document.createElement("div");
+    userMessage.className = "message pdg";
+    userMessage.textContent = "PDG : " + message;
+    chatMessages.appendChild(userMessage);
 
-        try {
-            // Appel à l'API OpenAI (ou modèle équivalent)
-            const response = await fetch("https://api.openai.com/v1/chat/completions", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer VOTRE_CLE_API_ICI"
-                },
-                body: JSON.stringify({
-                    model: "gpt-4o-mini",
-                    messages: [
-                        {
-                            role: "system",
-                            content: "Tu es Nasri, le Directeur Général virtuel de l'agence IA. Tu t'adresses à votre PDG Amadou DEME. Tu es professionnel, structuré et proactif."
-                        },
-                        {
-                            role: "user",
-                            content: message
-                        }
-                    ]
-                })
-            });
+    chatInput.value = "";
 
-            const data = await response.json();
-            const reponseIA = data.choices[0].message.content;
+    // Afficher l'indicateur de réflexion
+    const loadingMessage = document.createElement("div");
+    loadingMessage.className = "message nasri";
+    loadingMessage.textContent = "Nasri réfléchit…";
+    chatMessages.appendChild(loadingMessage);
 
-            // Remplacer l'indicateur par la réponse réelle
-            loadingElement.textContent = `Nasri: ${reponseIA}`;
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        } catch (error) {
-            loadingElement.textContent = "Nasri: Désolé PDG, une erreur est survenue lors de la connexion à mon cerveau IA.";
-            console.error("Erreur API:", error);
-        }
+    try {
+      const response = await fetch(NASRI_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: message
+        })
+      });
 
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-    });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Erreur du serveur.");
+      }
+
+      loadingMessage.textContent =
+        data.reply || "Nasri n'a pas retourné de réponse.";
+
+    } catch (error) {
+      loadingMessage.textContent =
+        "Erreur : impossible de contacter le Bureau de Nasri.";
+
+      console.error(error);
+    }
+
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  });
 }
-const SUPABASE_URL = "https://bhkmjzutiifhssmbbrul.supabase.co"; // Récupéré de votre capture précédente
-const SUPABASE_KEY = "VOTRE_CLE_PUBLISHABLE_ICI"; // Collez la clé copiée à l'Étape 1
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
