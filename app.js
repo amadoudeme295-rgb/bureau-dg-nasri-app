@@ -1,9 +1,9 @@
 const NASRI_URL =
   "https://bhkmjzutiifhssmbbrul.supabase.co/functions/v1/nasri";
 
-const chatForm = document.getElementById("chatForm");
-const chatInput = document.getElementById("chatInput");
-const chatMessages = document.getElementById("chatMessages");
+const chatForm = document.getElementById("chat-form");
+const chatInput = document.getElementById("chat-input");
+const chatMessages = document.getElementById("chat-messages");
 
 if (chatForm && chatInput && chatMessages) {
   chatForm.addEventListener("submit", async function (event) {
